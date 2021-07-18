@@ -1,6 +1,7 @@
 import cv2
 import numpy as np
 import random
+import math
 
 from env import Env
 from sensors import LaserSensor
@@ -11,9 +12,16 @@ map_ = cv2.imread("./map.png")
 
 env = Env(map_)
 sensor_location = np.array([100, 100])
-sensor = LaserSensor(sensor_location, 10, 10)
+sensor = LaserSensor(env, sensor_location, 100, 10)
+
 while True:
-    action = [[0, 1], [1, 0], [0, -1], [-1, 0]]
-    sensor.state += np.array(random.choice(action))
-    env.add_sensor(sensor.state)
+    actions = [[0, 5], [5, 0], [0, -5], [-5, 0]]
+    #sensor.pos += np.array(random.choice(actions))
+    sensor.pos += np.array(actions[1])
+    ret, new_pos = sensor.emit_laser(0)
+    if ret:
+        env.add_sensor(new_pos, c=(0, 255, 0))
+
+    env.add_sensor(sensor.pos)
     env.show()
+    env.clear()
