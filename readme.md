@@ -15,4 +15,5 @@ on what it has sensed.
       sensor that is what actually tries to see what is in the env.
 
 ## Example
-![alt text](https://github.com/LNS98/slam/blob/master/sensing_env.png?raw=true)
+![alt text](https://github.com/LNS98/slam/blob/master/env_map.png?raw=true)
+![alt text](https://github.com/LNS98/slam/blob/master/agent_map.png?raw=true)
