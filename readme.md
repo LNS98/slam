@@ -15,5 +15,7 @@ on what it has sensed.
       sensor that is what actually tries to see what is in the env.
 
 ## Example
-![alt text](https://github.com/LNS98/slam/blob/master/env_map.png?raw=true)
-![alt text](https://github.com/LNS98/slam/blob/master/agent_map.png?raw=true)
+*Display of agent in environment map*
+<img width="1147" alt="env_map" src="https://user-images.githubusercontent.com/40740001/126078394-470ef7a5-1c6f-46e2-8570-eaf21ef3dad5.png">
+*Display of the agent's in map of the environment*
+<img width="1067" alt="agent_map" src="https://user-images.githubusercontent.com/40740001/126078397-ba3dc737-2f3b-4286-90ba-c8ae3cc5b13e.png">
