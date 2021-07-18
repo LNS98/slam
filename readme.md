@@ -5,7 +5,7 @@ mostly for learning (and fun).*
 At this point, the agent can sense from the enviornment and create a map based
 on what it has sensed.
 
-# Files
+## Files
     - `env.py` holds `Env` class responsible for dealing
       with the environemnt. And `Display` class responsible for some plotting
       with cv2.
@@ -14,6 +14,6 @@ on what it has sensed.
     - `sensors.py` hold (for now) `LaserSensor`, a model sensor for a Lidar like
       sensor that is what actually tries to see what is in the env.
 
-
+## Example
 ![arch](https://github.com/LNS98/slam/blob/master/sensing_env.png
 "Agent Sensing Env")
