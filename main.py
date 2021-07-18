@@ -11,16 +11,16 @@ map_ = cv2.imread("./map.png")
 #map_ = np.array([[1, 1], [0, 0]]).astype(np.float32)
 
 env = Env(map_)
-sensor_location = np.array([100, 100])
-sensor = LaserSensor(env, sensor_location, 100, 10)
+sensor_location = np.array([100, 400])
+sensor = LaserSensor(env, sensor_location, 50, 10)
 
 while True:
     actions = [[0, 5], [5, 0], [0, -5], [-5, 0]]
     #sensor.pos += np.array(random.choice(actions))
     sensor.pos += np.array(actions[1])
-    ret, new_pos = sensor.emit_laser(0)
-    if ret:
-        env.add_sensor(new_pos, c=(0, 255, 0))
+    data = sensor.sense()
+    for point in data:
+        env.add_sensor(point, c=(0, 255, 0), r=4)
 
     env.add_sensor(sensor.pos)
     env.show()

@@ -19,7 +19,12 @@ class Env:
     def clear(self):
         self._display = self.map.copy()
 
-    def add_sensor(self, state, c=(255, 0, 0)):
+    def add_sensor(
+        self,
+        state,
+        c=(255, 0, 0),
+        r=10
+    ):
         x, y = state
         cv2.circle(
             self._display,

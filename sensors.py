@@ -16,6 +16,15 @@ class LaserSensor:
         self.env = env
         self.pos = pos
 
+    def sense(self):
+        data = []
+        for angle in np.linspace(0, 2*math.pi, 100):
+            ret, new_pos = self.emit_laser(angle)
+            if ret:
+                data.append(new_pos)
+
+        return data
+
     def emit_laser(self, angle):
         x, y = self.pos
 
@@ -27,7 +36,6 @@ class LaserSensor:
 
             # here you will have to sense from the map
             obs = self.env.map[new_y, new_x, :]
-            print(obs)
             if np.all(obs == self.env.FILL):
                 return True, (new_x, new_y)
 
