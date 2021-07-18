@@ -32,12 +32,12 @@ lidar = LaserSensor(env, init_pos, 50, 10)
 agent = Agent(env, init_pos, lidar)
 
 while True:
-    new_pos = agent.step(agent.RIGHT, size=3)
+    new_pos = agent.step(agent.DOWN, size=5)
     data = agent.sense()
     for point in data:
-        disp.add_sensor_point(point, c=(0, 255, 0), r=10)
+        disp.add_sensor_point(point, c=(0, 255, 0), r=5)
 
     print("agent pos: ", agent.pos, agent.pos in env.map)
-    disp.add_sensor_point(agent.pos, c=(255, 255, 0), r=10)
+    disp.add_sensor_point(agent.pos, c=(255, 255, 0), r=5)
     disp.show(fps=10)
     disp.clear()
