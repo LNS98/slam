@@ -35,7 +35,8 @@ class LaserSensor:
             new_y = int(y + i*math.sin(angle))
 
             # here you will have to sense from the map
-            obs = self.env.map[new_y, new_x, :]
+            if (new_x, new_y) in self.env:
+                obs = self.env.map[new_y, new_x, :]
             if np.all(obs == self.env.FILL):
                 return True, (new_x, new_y)
 
