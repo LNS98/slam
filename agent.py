@@ -13,6 +13,9 @@ class Agent:
         self.pos = pos
         self._env = env
         self._sensor = sensor
+        # lets start by init an array of zeros
+        self.local_map = np.zeros((self._env.map_size[0], self._env.map_size[1], 3))
+        self.local_map[:, :, :] = self._env.EMPTY
 
     def step(self, action=None, size=3):
         if action is None:
@@ -30,7 +33,14 @@ class Agent:
 
     def sense(self):
         if self._sensor:
-            return self._sensor.sense()
+            data = self._sensor.sense()
+            self._update_map(data)
+            return data
         return []
+
+    def _update_map(self, data):
+        for point in data:
+            print("point:  ", point)
+            self.local_map[point[1], point[0], :] = self._env.FILL
 
 

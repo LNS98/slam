@@ -22,7 +22,6 @@ class LaserSensor:
             ret, new_pos = self.emit_laser(angle)
             if ret:
                 data.append(new_pos)
-
         return data
 
     def emit_laser(self, angle):
@@ -33,12 +32,7 @@ class LaserSensor:
         for i in range(self.r + 1):
             new_x = int(x + i*math.cos(angle))
             new_y = int(y + i*math.sin(angle))
-
-            # here you will have to sense from the map
-            if (new_x, new_y) in self.env:
-                obs = self.env.map[new_y, new_x, :]
-            if np.all(obs == self.env.FILL):
+            if self.env.is_obstacle((new_x, new_y)):
                 return True, (new_x, new_y)
-
         return False, None
 
