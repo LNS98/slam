@@ -15,5 +15,4 @@ on what it has sensed.
       sensor that is what actually tries to see what is in the env.
 
 ## Example
-![arch](https://github.com/LNS98/slam/blob/master/sensing_env.png
-"Agent Sensing Env")
+![alt text](https://github.com/LNS98/slam/blob/master/sensing_env.png?raw=true)
