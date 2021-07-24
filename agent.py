@@ -40,7 +40,4 @@ class Agent:
 
     def _update_map(self, data):
         for point in data:
-            print("point:  ", point)
             self.local_map[point[1], point[0], :] = self._env.FILL
-
-
