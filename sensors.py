@@ -18,7 +18,7 @@ class LaserSensor:
 
     def sense(self):
         data = []
-        for angle in np.linspace(0, 2*math.pi, 100):
+        for angle in np.linspace(0, 2*math.pi, 50):
             ret, new_pos = self.emit_laser(angle)
             if ret:
                 data.append(new_pos)

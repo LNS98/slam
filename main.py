@@ -35,9 +35,12 @@ agent = Agent(env, env.start)
 lidar = LaserSensor(env, agent.pos, 50, 10)
 agent.sensor = lidar
 
+action = None
 while True:
+    # get the action for how to move the agent
+
     # move the agent
-    new_pos = agent.step(None, size=5)
+    new_pos = agent.step(action, size=5)
     data = agent.sense()
 
     # plot map
@@ -45,9 +48,20 @@ while True:
     for point in data:
         disp.add_point(point, c=(0, 255, 0), r=5)
     disp.add_point(agent.pos, c=(255, 255, 0), r=5)
-    disp.show(fps=1000)
+    disp.show(fps=40)
 
     # plot agent map
     disp.plot(agent.local_map, "agent map")
     disp.add_point(agent.pos, c=(255, 255, 0), r=5)
-    disp.show(fps=10)
+    k = disp.show(fps=40)
+
+    if k == ord("w"):
+        action = agent.UP
+    elif k == ord("s"):
+        action = agent.DOWN
+    elif k == ord("d"):
+        action = agent.RIGHT
+    elif k == ord("a"):
+        action = agent.LEFT
+    elif k == 27:
+        break

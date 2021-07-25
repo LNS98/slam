@@ -89,4 +89,4 @@ def generate_human_map():
 
 
 if __name__ == "__main__":
-    generate_human_env()
+    generate_human_map()
