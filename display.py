@@ -7,12 +7,17 @@ class Display:
     """
     def __init__(self, w=600, h=400):
         self.w, self.h = w, h
-        self._display = None
+        self._display = self._named_window = None
 
-    def plot(self, display):
+    def plot(self, display, window_name="image"):
+        self._window_name = window_name
         self._display = display.copy()
+        cv2.namedWindow(self._window_name)
 
-    def add_sensor_point(
+    def mouse_callback(self, mouse_callback_func):
+        cv2.setMouseCallback(self._window_name,  mouse_callback_func)
+
+    def add_point(
         self,
         state,
         c=(255, 0, 0),
@@ -27,9 +32,9 @@ class Display:
             thickness=-1
         )
 
-    def show(self, window_name="map", fps=10):
+    def show(self, fps=10):
         img = cv2.resize(
-            self._display, (self.w, self.h), interpolation=cv2.INTER_AREA
+            self._display, (self.h, self.w), interpolation=cv2.INTER_AREA
         )
-        cv2.imshow(window_name, img)
-        cv2.waitKey(0 if fps == 0 else 1000//fps)
+        cv2.imshow(self._window_name, img)
+        return cv2.waitKey(0 if fps == 0 else 1000//fps)

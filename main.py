@@ -21,30 +21,30 @@ def test_arr():
     return map_
 
 
-map_ = test_arr()
-# map_ = cv2.imread("./map.png")
-H, W = 480, 640
+# map_ = test_arr()
+map_ = cv2.imread("./map.png")
+H, W, _ = map_.shape
 
 disp = Display(W, H)
 
 env = Env(map_)
-init_pos = np.array([0, 0])
-lidar = LaserSensor(env, init_pos, 1, 10)
+init_pos = np.array([400, 400])
+lidar = LaserSensor(env, init_pos, 50, 10)
 agent = Agent(env, init_pos, lidar)
 
 while True:
     # move the agent
-    new_pos = agent.step(None, size=1)
+    new_pos = agent.step(None, size=5)
     data = agent.sense()
 
     # plot map
     disp.plot(map_)
     for point in data:
-        disp.add_sensor_point(point, c=(0, 255, 0), r=0)
-    disp.add_sensor_point(agent.pos, c=(255, 255, 0), r=0)
-    disp.show(fps=50)
+        disp.add_sensor_point(point, c=(0, 255, 0), r=5)
+    disp.add_sensor_point(agent.pos, c=(255, 255, 0), r=5)
+    disp.show(fps=10)
 
     # plot agent map
     disp.plot(agent.local_map)
-    disp.add_sensor_point(agent.pos, c=(255, 255, 0), r=0)
-    disp.show("agent map", fps=50)
+    disp.add_sensor_point(agent.pos, c=(255, 255, 0), r=5)
+    disp.show("agent map", fps=10)
