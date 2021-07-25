@@ -9,13 +9,21 @@ class Agent:
     LEFT = [-1, 0]
     ACTIONS = [UP, DOWN, RIGHT, LEFT]
 
-    def __init__(self, env, pos, sensor):
+    def __init__(self, env, pos, sensor=None):
         self.pos = pos
         self._env = env
         self._sensor = sensor
         # lets start by init an array of zeros
         self.local_map = np.zeros((self._env.map_size[0], self._env.map_size[1], 3))
         self.local_map[:, :, :] = self._env.EMPTY
+
+    @property
+    def sensor(self):
+        return self._sensor
+
+    @sensor.setter
+    def sensor(self, sensor):
+        self._sensor = sensor
 
     def step(self, action=None, size=3):
         if action is None:

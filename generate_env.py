@@ -7,11 +7,14 @@ import cv2
 
 from display import Display
 
+WHITE = (255, 255, 255)
+BLACK = (0, 0, 0)
 GREEN = (0, 255, 0)
 BLUE = (255, 0, 0)
 
 W, H = 500, 500
 map_ = np.zeros((W, H, 3), np.uint8)
+map_[:, :] = WHITE
 
 
 class CoordinateStore:
@@ -24,7 +27,7 @@ class CoordinateStore:
             self.points.append((x, y))
 
         if len(self.points) == 2:
-            cv2.rectangle(map_, self.points[0], self.points[1], (0, 0, 255), -1)
+            cv2.rectangle(map_, self.points[0], self.points[1], BLACK, -1)
             self.points = []
 
 
@@ -65,7 +68,7 @@ def try_1():
     disp.show(fps=0)
 
 
-def generate_human_env():
+def generate_human_map():
     store_coords = CoordinateStore()
     disp = Display(W, H)
     # Create a black image, a window and bind the function to window

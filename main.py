@@ -1,7 +1,7 @@
-import cv2
 import numpy as np
 import random
 
+from generate_env import generate_human_map
 from env import Env
 from display import Display
 from sensors import LaserSensor
@@ -21,16 +21,19 @@ def test_arr():
     return map_
 
 
-# map_ = test_arr()
-map_ = cv2.imread("./map.png")
+map_ = generate_human_map()
 H, W, _ = map_.shape
 
 disp = Display(W, H)
 
 env = Env(map_)
-init_pos = np.array([400, 400])
-lidar = LaserSensor(env, init_pos, 50, 10)
-agent = Agent(env, init_pos, lidar)
+env.start = (100, 100)
+env.goal = (400, 400)
+
+
+agent = Agent(env, env.start)
+lidar = LaserSensor(env, agent.pos, 50, 10)
+agent.sensor = lidar
 
 while True:
     # move the agent
@@ -40,11 +43,11 @@ while True:
     # plot map
     disp.plot(map_)
     for point in data:
-        disp.add_sensor_point(point, c=(0, 255, 0), r=5)
-    disp.add_sensor_point(agent.pos, c=(255, 255, 0), r=5)
-    disp.show(fps=10)
+        disp.add_point(point, c=(0, 255, 0), r=5)
+    disp.add_point(agent.pos, c=(255, 255, 0), r=5)
+    disp.show(fps=1000)
 
     # plot agent map
-    disp.plot(agent.local_map)
-    disp.add_sensor_point(agent.pos, c=(255, 255, 0), r=5)
-    disp.show("agent map", fps=10)
+    disp.plot(agent.local_map, "agent map")
+    disp.add_point(agent.pos, c=(255, 255, 0), r=5)
+    disp.show(fps=10)
